@@ -1,0 +1,211 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../notificationskit/0.2.1.1/notificationskit-0.2.1.1.module",
+    "group": "com.pentabit.notificationskit",
+    "module": "notificationskit",
+    "version": "0.2.1.1",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.14.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "iosArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "ios_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.2.21"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-darwin",
+          "version": {
+            "requires": "3.3.3"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-core",
+          "version": {
+            "requires": "1.10.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-serialization-json",
+          "version": {
+            "requires": "1.9.0"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-core",
+          "version": {
+            "requires": "3.3.3"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-content-negotiation",
+          "version": {
+            "requires": "3.3.3"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-serialization-kotlinx-json",
+          "version": {
+            "requires": "3.3.3"
+          }
+        },
+        {
+          "group": "io.insert-koin",
+          "module": "koin-core",
+          "version": {
+            "requires": "4.1.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "notificationskit-iosArm64Main-0.2.1.1.klib",
+          "url": "notificationskit-iosarm64-0.2.1.1.klib",
+          "size": 105385,
+          "sha512": "cb3df74f6c24d6f00f4aed5c93b40e9f3f947b0eea4d0d46dd61f61b0351a4b24c571cb3d8ac9f3301431ec5db4a2122d0e2a086f0ef599c18765151c024fdff",
+          "sha256": "96a51254365dd336548d997ba723982bb7d883870cf093f2cf397fb81889b9a1",
+          "sha1": "80d92e23dadf1f82b3dbee9d0007e600d6bf1005",
+          "md5": "bb3c37993eb6051055f97e857106a7f5"
+        },
+        {
+          "name": "notificationskit-iosArm64Cinterop-FirebaseRemoteConfigMain-0.2.1.1.klib",
+          "url": "notificationskit-iosarm64-0.2.1.1-cinterop-FirebaseRemoteConfig.klib",
+          "size": 11872,
+          "sha512": "37c287586acfbe427ebe979a0928fc1a4bfc289320919dc7a2c6d372a110c3d3e0d0993ab196fbd2262b487b2270461c7cf0546152c91ef72e7570a8190ce3ec",
+          "sha256": "2c4fc232f7c2f0aaf27a041c8f372370fc9a80395e23bb1036a84e288f8a3e57",
+          "sha1": "748ba6b879422167a84cd0f63bcb8c0178fe7757",
+          "md5": "597fea38f7d5777e24241b7d3a4e35aa"
+        }
+      ]
+    },
+    {
+      "name": "iosArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "ios_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "files": [
+        {
+          "name": "notificationskit-iosarm64-0.2.1.1-sources.jar",
+          "url": "notificationskit-iosarm64-0.2.1.1-sources.jar",
+          "size": 31656,
+          "sha512": "cf7e22730fa95653bd9e06d1c26449a86949bbff7555be301180323e8ffea170ac96c1a3519c57e139555fdf7e49e288d0e54aa380e7bfa135bdeec0c441c92f",
+          "sha256": "d9892d33304302666fd21694ffc47f5c7aec458928fc79a9ea959ae12e5fea61",
+          "sha1": "35ce7645142545e18cfd815612e56c3bc5e5b730",
+          "md5": "f80a35c3c04241d4dbc2cc0e8db6a255"
+        }
+      ]
+    },
+    {
+      "name": "iosArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "ios_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.2.21"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-darwin",
+          "version": {
+            "requires": "3.3.3"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-core",
+          "version": {
+            "requires": "1.10.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-serialization-json",
+          "version": {
+            "requires": "1.9.0"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-core",
+          "version": {
+            "requires": "3.3.3"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-content-negotiation",
+          "version": {
+            "requires": "3.3.3"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-serialization-kotlinx-json",
+          "version": {
+            "requires": "3.3.3"
+          }
+        },
+        {
+          "group": "io.insert-koin",
+          "module": "koin-core",
+          "version": {
+            "requires": "4.1.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "notificationskit-iosarm64-0.2.1.1-metadata.jar",
+          "url": "notificationskit-iosarm64-0.2.1.1-metadata.jar",
+          "size": 15811,
+          "sha512": "f8b6b9afd790e01f52a66e30ff5a5a316477d3809eecfde5e1de330db0adb082546480c7a52489f8a4ce3dcae895092b7adb4aba6186a622d15e77c426d05323",
+          "sha256": "378347e33906e1402f26e399fe7a339096a99c4fc274bf80d06bf2253ec04a4c",
+          "sha1": "c9b4df58eb7d7ec3299b8884ba1e0c0a62b33c51",
+          "md5": "22357331a89cf6560a2bdecf3f73f6aa"
+        }
+      ]
+    }
+  ]
+}
