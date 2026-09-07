@@ -1,0 +1,183 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "url": "../../notificationskit/0.2.1.0/notificationskit-0.2.1.0.module",
+    "group": "com.pentabit.notificationskit",
+    "module": "notificationskit",
+    "version": "0.2.1.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.14.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "androidApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.2.21"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "notificationskit.aar",
+          "url": "notificationskit-android-0.2.1.0.aar",
+          "size": 132771,
+          "sha512": "87b03fa5f35bf1fb2f142aaa5c80e0705e658d94de0ab2bc95d26fe7abddefd963c65633374f177f457e4c432d545669520730eead9325790529a9e45c908a91",
+          "sha256": "5be0bd5bb9a816caf833064a7004aff613b26eee607864f297619618621fbcd4",
+          "sha1": "a7b9ed95eefa2950cdb136bd0b231ef8b28fe0c9",
+          "md5": "e7dc5f2618dec92b11e88519198b6bb8"
+        }
+      ]
+    },
+    {
+      "name": "androidRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.2.21"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-okhttp",
+          "version": {
+            "requires": "3.3.3"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-android",
+          "version": {
+            "requires": "1.10.2"
+          }
+        },
+        {
+          "group": "com.google.firebase",
+          "module": "firebase-bom",
+          "version": {
+            "requires": "34.2.0"
+          },
+          "attributes": {
+            "org.gradle.category": "platform"
+          }
+        },
+        {
+          "group": "com.google.firebase",
+          "module": "firebase-config"
+        },
+        {
+          "group": "com.google.firebase",
+          "module": "firebase-messaging"
+        },
+        {
+          "group": "androidx.core",
+          "module": "core-ktx",
+          "version": {
+            "requires": "1.17.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-core",
+          "version": {
+            "requires": "1.10.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-serialization-json",
+          "version": {
+            "requires": "1.9.0"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-core",
+          "version": {
+            "requires": "3.3.3"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-content-negotiation",
+          "version": {
+            "requires": "3.3.3"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-serialization-kotlinx-json",
+          "version": {
+            "requires": "3.3.3"
+          }
+        },
+        {
+          "group": "io.insert-koin",
+          "module": "koin-core",
+          "version": {
+            "requires": "4.1.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "notificationskit.aar",
+          "url": "notificationskit-android-0.2.1.0.aar",
+          "size": 132771,
+          "sha512": "87b03fa5f35bf1fb2f142aaa5c80e0705e658d94de0ab2bc95d26fe7abddefd963c65633374f177f457e4c432d545669520730eead9325790529a9e45c908a91",
+          "sha256": "5be0bd5bb9a816caf833064a7004aff613b26eee607864f297619618621fbcd4",
+          "sha1": "a7b9ed95eefa2950cdb136bd0b231ef8b28fe0c9",
+          "md5": "e7dc5f2618dec92b11e88519198b6bb8"
+        }
+      ]
+    },
+    {
+      "name": "androidSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "files": [
+        {
+          "name": "notificationskit-android-0.2.1.0-sources.jar",
+          "url": "notificationskit-android-0.2.1.0-sources.jar",
+          "size": 37864,
+          "sha512": "bc0b9977e7717f258c845ae1e03d749a14c59ec8cb6bbc5c286ba4e078b5058d30d0323fc378d128a1ee979e7168cab37aa6e02c1ae2101443eae94b948c6ef7",
+          "sha256": "86c6a2ef5af58b758e3ee1eb06784c51714fd8f18a56d1d74b9c57feb6fb0588",
+          "sha1": "11b8049e05bc7ff30ca2189919c0c40d72936f09",
+          "md5": "9d285d7ff9cbb132c3d676c1f76a621b"
+        }
+      ]
+    }
+  ]
+}
