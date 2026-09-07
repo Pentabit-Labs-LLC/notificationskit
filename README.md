@@ -1,14 +1,17 @@
-# NotificationsKit — Android/iOS Integration Guide
-[![](https://jitpack.io/v/Pentabit-Labs-LLC/notificationskit-android.svg)](https://jitpack.io/#Pentabit-Labs-LLC/notificationskit-android)
+# NotificationsKit — Android/iOS/Common Integration Guide
+[![](https://jitpack.io/v/Pentabit-Labs-LLC/notificationskit.svg)](https://jitpack.io/#Pentabit-Labs-LLC/notificationskit)
 
 Shared FCM/ADM → CMS notification pipeline used across Pentabit's apps (expense-tracker-kmm,
 CloudStorageKMM, caller-theme-android, wallpaper-app, …). This guide covers everything a
 consuming app needs: adding the dependency, the Remote Config keys it expects, the public API,
 and integration sketches for both Android and iOS.
 
-NotificationsKit is distributed as a prebuilt AAR (Android) / CocoaPod (iOS) — its source is
-maintained privately; this repo carries only the compiled artifact. See "Releasing" in the
-private source repo if you're a maintainer publishing a new version, not integrating it.
+NotificationsKit ships through three independent channels, same source, pick whichever fits your
+app: a prebuilt AAR (Android-only apps), a CocoaPod (iOS-only, source-built), or — for KMM apps —
+a single multiplatform Maven coordinate you add once to `commonMain` and Gradle resolves the right
+binary per target. Its source is maintained privately; this repo (and GitHub Packages, for the
+common option) carries only compiled artifacts. See "Releasing" in the private source repo if
+you're a maintainer publishing a new version, not integrating it.
 
 ## 1. Dependencies
 
@@ -36,9 +39,54 @@ below).
 
 ```ruby
 # Podfile
-pod 'notificationskit', :git => 'https://github.com/<org>/notifications-kit.git', :tag => '0.1.0.0'
+pod 'notificationskit', :git => 'git@bitbucket.org:pentabitlabs/notification-kit-kmm.git', :tag => '0.1.0.0'
 ```
 `pod install` produces the `NotificationsKit` framework for Swift to `import NotificationsKit`.
+
+Use the Android and iOS options above if your app isn't a Kotlin Multiplatform project (or you'd
+rather wire each platform separately). If it *is* KMM and you want one dependency instead of two,
+use the option below.
+
+### Common (KMM apps — one dependency for both platforms)
+
+This is a real multiplatform publish (not the prebuilt AAR above) — Gradle resolves the correct
+binary (Android `.aar` or the matching iOS klib) per target automatically from a single
+coordinate. Building the iOS klibs needs a macOS/Xcode toolchain, so this is published by hand
+from a Mac (see the private repo's README for the release process), not built automatically —
+unlike the Android AAR channel, there's no JitPack badge tracking this one.
+
+It's hosted as a plain flat Maven repo on GitHub Pages, not a package registry — just static
+files over HTTPS, same as Maven Central serves real published libraries. No token, no login, no
+`gradle.properties` entry needed to depend on it:
+
+```kotlin
+// settings.gradle.kts
+dependencyResolutionManagement {
+    repositories {
+        maven {
+            url = uri("https://pentabit-labs-llc.github.io/notificationskit/maven-repo")
+        }
+    }
+}
+```
+
+```kotlin
+// shared/commonMain module's build.gradle.kts
+sourceSets {
+    val commonMain by getting {
+        dependencies {
+            implementation("com.pentabit.notificationskit:notificationskit:0.1.0.0")
+        }
+    }
+}
+```
+
+That's the entire dependency wiring for both platforms — no separate JitPack `maven()` entry, no
+CocoaPods `pod` line, and none of Ktor/Koin/coroutines/serialization need declaring separately
+either (unlike the raw-AAR Android path below, this is a real Maven module with transitive
+dependencies resolved normally). The public API, ownership boundary, and Remote Config keys
+further down this doc are identical regardless of which of the three channels you used to add the
+dependency.
 
 ## 2. Ownership boundary
 
