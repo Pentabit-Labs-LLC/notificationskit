@@ -239,7 +239,7 @@ class MyAdmService : ADMNotificationService(MyAdmService::class.java.name) {
         val nid = payload.data["nid"] ?: return
         builder.setContentIntent(buildClickPendingIntent(nid))
                .setDeleteIntent(buildDismissPendingIntent(nid))
-        NotificationManagerCompat.from(context).notify(nid.hashCode(), builder.build())
+        NotificationManagerCompat.from(applicationContext).notify(nid.hashCode(), builder.build())
     }
 }
 ```
