@@ -94,15 +94,17 @@ This is the split this module was built around — read it before wiring anythin
 
 | | Owns |
 |---|---|
-| **Host app** | Firebase/ADM SDK setup, obtaining the push token, forwarding it to this module, deciding *when* a notification was opened/dismissed/converted, iOS `UNUserNotificationCenterDelegate` wiring, deep-link resolution |
-| **NotificationsKit** | Its own Remote Config fetch, vault bearer decrypt, ApiVault "content" key fetch, `/device-api` registration (dedup-checked), `/notification-events` reporting |
+| **Host app** | Firebase/ADM SDK setup, deciding *when* a notification was opened/dismissed/converted, iOS `UNUserNotificationCenterDelegate` wiring, deep-link resolution (`PendingIntent`s) |
+| **NotificationsKit** | Its own Remote Config fetch, vault bearer decrypt, ApiVault "content" key fetch, `/device-api` registration (dedup-checked), `/notification-events` reporting — **and, optionally on Android/Fire OS**, token registration + building the visual notification, via [`FCMNotificationService`/`ADMNotificationService`](#4b-optional-fcmnotificationservice--admnotificationservice) |
 
 Concretely:
 
-- **Getting the token is the host's job.** FCM: `FirebaseMessaging.getInstance().getToken()` /
-  `onNewToken`. ADM (Fire OS): the Amazon SDK's `ADM`/`ADMMessageHandlerBase` classes and their
-  manifest receivers. Whichever SDK produced it, the host just calls
-  `NotificationsKit.registerToken(token)` — this module doesn't care where the token came from.
+- **Getting the token is still the host's job either way** — this module never calls
+  `FirebaseMessaging.getInstance()` or ADM's registration APIs itself. What changed: on
+  Android/Fire OS you can now let `FCMNotificationService`/`ADMNotificationService` (§4b) *forward*
+  the token to `NotificationsKit.registerToken` for you, instead of writing that one line
+  yourself. iOS still has no equivalent — call `registerToken` from your own delegate, same as
+  before.
 - **iOS notification-tap handling is the host's job**, not this module's. Wire
   `UNUserNotificationCenterDelegate` in your own `AppDelegate.swift` and call
   `NotificationsKit.reportOpened(nid)` / `reportConverted(nid)` from there. Note iOS has no
@@ -114,10 +116,13 @@ Concretely:
 - **Only the "content" vault category.** If your app also needs the "ai" category key (e.g. for
   receipt scanning), that stays your app's own vault call — this module deliberately doesn't
   fetch it.
-- Android notification *building* (channel creation, image download, BigPictureStyle, click/dismiss
-  PendingIntents) isn't in this module — that stays host-side alongside FCM/ADM token retrieval.
-- Real Amazon ADM token retrieval stays host-side too — `registerToken()` accepts any token string
-  regardless of source, so this module never needed to touch ADM itself.
+- **Notification building (channel, image, `BigPictureStyle`) is now optional-in, Android/Fire OS
+  only** — see §4b. `PendingIntent` attachment (and therefore deep-link resolution) stays entirely
+  host-side even when using the base classes — the module only assembles the notification, never
+  decides what tapping/dismissing it does.
+- **iOS has no equivalent of §4b** — no base class, no notification-building helper. Rich iOS
+  notifications need a Notification Service Extension (a separate Xcode target), which is a
+  materially different integration shape; not covered by this module yet.
 
 ## 3. Remote Config keys this module reads
 
@@ -177,6 +182,8 @@ override fun onNewToken(token: String) {
 // Host's NotificationClickReceiver
 CoroutineScope(Dispatchers.IO).launch { NotificationsKit.reportOpened(nid) }
 ```
+(Or extend `FCMNotificationService`/`ADMNotificationService` instead of writing the above by hand
+— see §4b.)
 
 ### iOS integration sketch
 
@@ -196,6 +203,70 @@ func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: Str
 matches the existing `FcmTokenSyncBridge` convention if you'd rather add a non-suspend
 Swift-facing wrapper object later.)
 
+## 4b. Optional: FCMNotificationService / ADMNotificationService
+
+Android/Fire OS only. Extend one of these instead of `FirebaseMessagingService`/
+`ADMMessageHandlerBase` directly, and the module handles token registration and building the
+visual notification for you — you only implement four small overrides and attach your
+`PendingIntent`s.
+
+**FCM:**
+```kotlin
+class MyFcmService : FCMNotificationService() {
+    override fun notificationChannelId() = "default"
+    override fun notificationChannelName() = "Notifications"
+    override fun notificationSmallIcon() = R.drawable.ic_notification
+
+    override fun onNotificationBuilt(payload: PushPayload, builder: NotificationCompat.Builder) {
+        val nid = payload.data["nid"] ?: return
+        builder.setContentIntent(buildClickPendingIntent(nid))   // your own deep-link resolution
+               .setDeleteIntent(buildDismissPendingIntent(nid))
+        NotificationManagerCompat.from(applicationContext).notify(nid.hashCode(), builder.build())
+    }
+}
+```
+Manifest: the usual `<service android:name=".MyFcmService">` with the FCM `<intent-filter>` —
+nothing new there, just point it at your subclass instead of a plain `FirebaseMessagingService`.
+
+**ADM (Fire OS):**
+```kotlin
+class MyAdmService : ADMNotificationService(MyAdmService::class.java.name) {
+    override fun notificationChannelId() = "default"
+    override fun notificationChannelName() = "Notifications"
+    override fun notificationSmallIcon() = R.drawable.ic_notification
+
+    override fun onNotificationBuilt(payload: PushPayload, builder: NotificationCompat.Builder) {
+        val nid = payload.data["nid"] ?: return
+        builder.setContentIntent(buildClickPendingIntent(nid))
+               .setDeleteIntent(buildDismissPendingIntent(nid))
+        NotificationManagerCompat.from(context).notify(nid.hashCode(), builder.build())
+    }
+}
+```
+The `MyAdmService::class.java.name` argument matches Amazon's own documented pattern for
+`ADMMessageHandlerBase` — required so Amazon's reflection-based dispatch (which needs a public
+no-arg constructor on your concrete class) still works. Your app still needs the usual ADM
+manifest entries (`amazon.device.messaging.permission.RECEIVE`, the `ADM_MESSAGE_HANDLER`
+meta-data, etc.) — this only changes what the handler class itself does.
+
+**Amazon ADM setup — read before using `ADMNotificationService`:** Amazon doesn't publish the ADM
+SDK to a Maven repository, only as a downloadable jar. Your app needs
+`amazon-device-messaging-1.2.0.jar` in its own `libs/` folder and a
+`compileOnly(files("libs/amazon-device-messaging-1.2.0.jar"))` dependency — same manual step every
+ADM integration requires, `compileOnly` dependencies aren't transitive so this module bundling its
+own copy doesn't cover your app too. Download: https://developer.amazon.com/docs/adm/overview.html#download
+(requires an Amazon developer account).
+
+Both base classes only ever *build* the notification — they never call
+`NotificationManagerCompat.notify()` themselves. Picking a notification id, attaching
+`PendingIntent`s (deep-link resolution), calling `.build()`, actually posting it (or choosing not
+to), and calling `reportOpened`/`reportDismissed`/`reportConverted` from your own click/dismiss
+receivers all stay entirely your own code, unchanged from integrating without these classes at
+all — exactly as shown in the two examples above. Skip §4b entirely and keep writing your own
+`FirebaseMessagingService`/`ADMMessageHandlerBase` + calling `registerToken` directly if you'd
+rather have full control over notification building, or need to do other things in that service
+beyond notifications.
+
 ## 5. Versions to keep aligned
 
 The AAR/framework was built against: Kotlin 2.2.21, Ktor 3.3.3, Koin 4.1.1 (`koin-core`),
@@ -210,7 +281,12 @@ registration.
 
 ## 6. Known gaps
 
-- Android notification *building* (channel/BigPictureStyle/PendingIntents) and real ADM token
-  retrieval are host-side by design — see §2.
-- iOS has no "swiped away" delegate callback, so `reportDismissed` may simply never be called
+- `ADMNotificationService` hasn't been verified against a real Fire OS build — no ADM/Fire OS
+  environment was available to test it in. It follows Amazon's documented API shape in good faith;
+  treat it as needing a real-device check before shipping.
+- Notification building beyond what §4b's base classes cover (custom layouts, action buttons,
+  grouped/summary notifications) still needs your own code — the base classes hand you a
+  `NotificationCompat.Builder` you can keep customizing before calling `.build()`.
+- iOS has no equivalent of §4b at all (no base class, no notification-building helper) — see §2.
+  It also has no "swiped away" delegate callback, so `reportDismissed` may simply never be called
   there — expected, not a bug.
