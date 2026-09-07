@@ -1,0 +1,324 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "com.pentabit.notificationskit",
+    "module": "notificationskit",
+    "version": "0.1.1.1",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.14.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "metadataApiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.platform.type": "common"
+      },
+      "dependencies": [
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib",
+          "version": {
+            "requires": "2.2.21"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-darwin",
+          "version": {
+            "requires": "3.3.3"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-coroutines-core",
+          "version": {
+            "requires": "1.10.2"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlinx",
+          "module": "kotlinx-serialization-json",
+          "version": {
+            "requires": "1.9.0"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-core",
+          "version": {
+            "requires": "3.3.3"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-client-content-negotiation",
+          "version": {
+            "requires": "3.3.3"
+          }
+        },
+        {
+          "group": "io.ktor",
+          "module": "ktor-serialization-kotlinx-json",
+          "version": {
+            "requires": "3.3.3"
+          }
+        },
+        {
+          "group": "io.insert-koin",
+          "module": "koin-core",
+          "version": {
+            "requires": "4.1.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "notificationskit-metadata-0.1.1.1.jar",
+          "url": "notificationskit-0.1.1.1.jar",
+          "size": 21660,
+          "sha512": "daf595459c6885b685d090be9be3b00f0ef4eda7eb7d2f8308edc7d189e06961d90a40911545998e996354e94dbef87014c05f00b5ecba0556c92fc5d0d98570",
+          "sha256": "eb2543ef0f12e0223e5f9e0f6bb3a36acde048e8a60c471b702e0b987c3b9a58",
+          "sha1": "5f8f588b0744096777eb6c67c2ed853e48f9029b",
+          "md5": "fd0c397b599ae7e62218f8c1fdabee00"
+        }
+      ]
+    },
+    {
+      "name": "metadataSourcesElements",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.platform.type": "common"
+      },
+      "files": [
+        {
+          "name": "notificationskit-kotlin-0.1.1.1-sources.jar",
+          "url": "notificationskit-0.1.1.1-sources.jar",
+          "size": 30284,
+          "sha512": "99d5b99c338c4d30d3905a71423db067b425a226a58c1d0a191f79a34860db37a467ee48149477cfb7835abec38bf1f744be13a80933d1bcba93af8e5b88361f",
+          "sha256": "4b621e48119c8e6743353560936667ac1782b171f0c54b5c58a31c71b7c67376",
+          "sha1": "30f02ae801330b18741106c3925b8394cae38269",
+          "md5": "ef0b0db51ff603806c17a2900e6a7815"
+        }
+      ]
+    },
+    {
+      "name": "androidApiElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../notificationskit-android/0.1.1.1/notificationskit-android-0.1.1.1.module",
+        "group": "com.pentabit.notificationskit",
+        "module": "notificationskit-android",
+        "version": "0.1.1.1"
+      }
+    },
+    {
+      "name": "androidRuntimeElements-published",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "aar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../notificationskit-android/0.1.1.1/notificationskit-android-0.1.1.1.module",
+        "group": "com.pentabit.notificationskit",
+        "module": "notificationskit-android",
+        "version": "0.1.1.1"
+      }
+    },
+    {
+      "name": "androidSourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "android",
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "available-at": {
+        "url": "../../notificationskit-android/0.1.1.1/notificationskit-android-0.1.1.1.module",
+        "group": "com.pentabit.notificationskit",
+        "module": "notificationskit-android",
+        "version": "0.1.1.1"
+      }
+    },
+    {
+      "name": "iosArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "ios_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../notificationskit-iosarm64/0.1.1.1/notificationskit-iosarm64-0.1.1.1.module",
+        "group": "com.pentabit.notificationskit",
+        "module": "notificationskit-iosarm64",
+        "version": "0.1.1.1"
+      }
+    },
+    {
+      "name": "iosArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "ios_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../notificationskit-iosarm64/0.1.1.1/notificationskit-iosarm64-0.1.1.1.module",
+        "group": "com.pentabit.notificationskit",
+        "module": "notificationskit-iosarm64",
+        "version": "0.1.1.1"
+      }
+    },
+    {
+      "name": "iosArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "ios_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../notificationskit-iosarm64/0.1.1.1/notificationskit-iosarm64-0.1.1.1.module",
+        "group": "com.pentabit.notificationskit",
+        "module": "notificationskit-iosarm64",
+        "version": "0.1.1.1"
+      }
+    },
+    {
+      "name": "iosSimulatorArm64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "ios_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../notificationskit-iossimulatorarm64/0.1.1.1/notificationskit-iossimulatorarm64-0.1.1.1.module",
+        "group": "com.pentabit.notificationskit",
+        "module": "notificationskit-iossimulatorarm64",
+        "version": "0.1.1.1"
+      }
+    },
+    {
+      "name": "iosSimulatorArm64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "ios_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../notificationskit-iossimulatorarm64/0.1.1.1/notificationskit-iossimulatorarm64-0.1.1.1.module",
+        "group": "com.pentabit.notificationskit",
+        "module": "notificationskit-iossimulatorarm64",
+        "version": "0.1.1.1"
+      }
+    },
+    {
+      "name": "iosSimulatorArm64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "ios_simulator_arm64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../notificationskit-iossimulatorarm64/0.1.1.1/notificationskit-iossimulatorarm64-0.1.1.1.module",
+        "group": "com.pentabit.notificationskit",
+        "module": "notificationskit-iossimulatorarm64",
+        "version": "0.1.1.1"
+      }
+    },
+    {
+      "name": "iosX64ApiElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-api",
+        "org.jetbrains.kotlin.native.target": "ios_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../notificationskit-iosx64/0.1.1.1/notificationskit-iosx64-0.1.1.1.module",
+        "group": "com.pentabit.notificationskit",
+        "module": "notificationskit-iosx64",
+        "version": "0.1.1.1"
+      }
+    },
+    {
+      "name": "iosX64SourcesElements-published",
+      "attributes": {
+        "org.gradle.category": "documentation",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.docstype": "sources",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-runtime",
+        "org.jetbrains.kotlin.native.target": "ios_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../notificationskit-iosx64/0.1.1.1/notificationskit-iosx64-0.1.1.1.module",
+        "group": "com.pentabit.notificationskit",
+        "module": "notificationskit-iosx64",
+        "version": "0.1.1.1"
+      }
+    },
+    {
+      "name": "iosX64MetadataElements-published",
+      "attributes": {
+        "artifactType": "org.jetbrains.kotlin.klib",
+        "org.gradle.category": "library",
+        "org.gradle.jvm.environment": "non-jvm",
+        "org.gradle.usage": "kotlin-metadata",
+        "org.jetbrains.kotlin.native.target": "ios_x64",
+        "org.jetbrains.kotlin.platform.type": "native"
+      },
+      "available-at": {
+        "url": "../../notificationskit-iosx64/0.1.1.1/notificationskit-iosx64-0.1.1.1.module",
+        "group": "com.pentabit.notificationskit",
+        "module": "notificationskit-iosx64",
+        "version": "0.1.1.1"
+      }
+    }
+  ]
+}

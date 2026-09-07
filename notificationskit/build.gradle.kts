@@ -27,8 +27,8 @@ publishing {
         create<MavenPublication>("NotificationsKit") {
             groupId = "com.github.Pentabit-Labs-LLC"
             artifactId = "notificationskit"
-            version = "0.1.0.0"
-            artifact("$projectDir/libs/NotificationsKit_v0100.aar")
+            version = "0.1.1.1"
+            artifact("$projectDir/libs/NotificationsKit_v0111.aar")
         }
     }
 }
